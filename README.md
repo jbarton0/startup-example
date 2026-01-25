@@ -35,4 +35,16 @@ I will use the required technologies in the following ways.
 - **DB/Login** - Storing reviews, recipe hyperlinks, authentication, user info
 - **WebSocket** - Small notification bar lighting up when a user submits a review
 
+## HTML Deliverable
+For this deliverable, I used HTML to structure my startup.
+
+- [] Deliverable prerequisites (Git commits, Simon deployed, Github link)
+- [] **HTML pages**
+- [] **Proper HTML element usage**
+- [] **Links**
+- [] **Text** 
+- [] **3rd party API placeholder**
+- [] **Images**
+- [] **DB/Login**
+- [] **Websocket**
 

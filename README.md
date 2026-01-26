@@ -38,13 +38,13 @@ I will use the required technologies in the following ways.
 ## HTML Deliverable
 For this deliverable, I used HTML to structure my startup.
 
-- [] Deliverable prerequisites (Git commits, Simon deployed, Github link)
-- [] **HTML pages**
-- [] **Proper HTML element usage**
-- [] **Links**
-- [] **Text** 
-- [] **3rd party API placeholder**
-- [] **Images**
-- [] **DB/Login**
-- [] **Websocket**
+- [x] Deliverable prerequisites (Git commits, Simon deployed, Github link)
+- [x] **HTML pages** - One login page and one main page displaying content.
+- [x] **Proper HTML element usage** - use of HTML tags including body, nav, main, header, footer.
+- [x] **Links** - Links in header for each page, and links to recipes on submission placeholders.
+- [x] **Text** - Text describing submission for each one.
+- [x] **3rd party API placeholder** - Placeholder on login page for random photo call.
+- [x] **Images** - Image on main page and under drop down for each submission.
+- [x] **DB/Login** - Username input for login which will be displayed with submissions.
+- [x] **Websocket** - Placeholder button on login page (New Rating Submitted) which will light up in realtime with every submitted vote.
 

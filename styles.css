@@ -3,22 +3,31 @@
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: #f0d7a9;
-    color:#be9a60;
+    color:#fef2db;
     font-family: "Georgia", sans-serif;
     font-size: 30px;
 }
-
 .navbar .nav-link {
   color:#be9a60;
 }
 .navbar .nav-link:hover {
   color: white;
 }
-
 .navbar-brand {
   color: #fef2db;
   font-size: 35px;
 }
 .navbar-brand:hover {
   color: inherit;
+}
+
+.d-flex {
+    padding: 150px;
+    font-family: "Georgia", sans-serif;
+    color:#be9a60;
+}
+
+.form-control {
+    width: 250px;
+    
 }

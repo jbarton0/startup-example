@@ -22,22 +22,18 @@
                         <a class="nav-link" href="main.html">Main</a>
                     </li>
       </nav>
-      <hr />
     </header>
 
-    <main>
-        <h2>Login</h2>
-        <form method="get" action="main.html"></form>
-        <input type="text" placeholder="Username" />
-        <input type="password" placeholder="Password" />
-        <div>
-            <br>
-            <button type="submit">Login to Existing</button>
-        </div>
-        <div>
-            <button type="submit">Create as New</button>
-        </div>
-        <hr />
+    <main class="d-flex justify-content-center">
+        <form method="get" action="main.html" class="text-center">
+            <h2>Login</h2>
+            <div class="mb-3">
+                <input type="email" placeholder="Username" class="form-control mb-3" id="exampleInputEmail1" aria-describedby="emailHelp">            </div>
+            <div class="mb-3">
+                <input type="password" placeholder="Password" class="form-control mb-3" id="exampleInputPassword1">
+            </div>
+            <button type="submit" class="btn btn-outline-secondary">Submit</button>
+        </form>
     </main>
 
     <footer>

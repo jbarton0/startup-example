@@ -22,12 +22,16 @@
 }
 
 .d-flex {
-    padding: 150px;
+    padding-top: 200px;
+    padding-bottom: 50px;
     font-family: "Georgia", sans-serif;
     color:#be9a60;
 }
 
 .form-control {
     width: 250px;
-    
+}
+
+.fixed-bottom {
+    background-color: #f0d7a9;
 }

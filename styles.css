@@ -6,7 +6,7 @@
   font-style: normal;
 }
 
-.body {
+body {
   font-family: "Work Sans", sans-serif;
 }
 
@@ -33,11 +33,17 @@
   color: inherit;
 }
 
-.d-flex {
+#login {
     padding-top: 200px;
     padding-bottom: 50px;
     font-family: "Work Sans", sans-serif;
     color:#be9a60;
+}
+
+#main_ {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  font-family: "Work Sans", sans-serif;
 }
 
 .form-control {
@@ -47,5 +53,3 @@
 .fixed-bottom {
     background-color: #f0d7a9;
 }
-
-

@@ -54,7 +54,7 @@ For this deliverable, I used CSS to design my startup.
 - [x] Deliverable prerequisites (Git commits, Simon deployed, Github link)
 - [x] **Header, main block, footer** - I used consistent structural elements across both pages.
 - [x] **Resizing elements** - Bootstrap flex ensures screen resizing.
-- [x] **Text standardization** - I used 'Georgia' for all of my fonts. `styles.css` contains styling for both `index.html` and `main.html`.
+- [x] **Text standardization** - I imported 'Work Sans' for all of my fonts. `styles.css` contains styling for both `index.html` and `main.html`.
 - [x] **Images** - I used the same images, but resized them to better fit the new structure.
 - [x] **Spacing** - Margin and padding help even out the main structure.
 - [x] **Cards** - I used Bootstrap cards for my recipe submissions.

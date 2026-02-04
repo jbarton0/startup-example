@@ -1,11 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+.work-sans-font {
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.body {
+  font-family: "Work Sans", sans-serif;
+}
+
 .navbar {
     border-radius: 15px;
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: #f0d7a9;
     color:#fef2db;
-    font-family: "Georgia", sans-serif;
     font-size: 30px;
+    font-family: "Work Sans", sans-serif;
 }
 .navbar .nav-link {
   color:#be9a60;
@@ -24,7 +36,7 @@
 .d-flex {
     padding-top: 200px;
     padding-bottom: 50px;
-    font-family: "Georgia", sans-serif;
+    font-family: "Work Sans", sans-serif;
     color:#be9a60;
 }
 
@@ -35,3 +47,5 @@
 .fixed-bottom {
     background-color: #f0d7a9;
 }
+
+

@@ -12,17 +12,17 @@ export default function App() {
       <header>
         <nav className="navbar navbar-expand-lg fixed-top" data-bs-theme="light">
           <div className="container-fluid">
-            <a className="navbar-brand">Meal Prep</a>
+            <NavLink className="navbar-brand">Meal Prep</NavLink>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <a className="nav-link" aria-current="page" href="index.html">Login</a>
+                  <NavLink className="nav-link" aria-current="page" to="login.html">Login</NavLink>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="main.html">Main</a>
+                  <NavLink className="nav-link" to="main.html">Main</NavLink>
                 </li>
               </ul>
             </div>
@@ -33,7 +33,7 @@ export default function App() {
       <main>App components go here</main>
 
       <footer className="fixed-bottom p-3 d-flex justify-content-between align-items-center">
-          <a href="https://github.com/jbarton0/startup-example" style={{color: 'black'}}>Jacqueline Barton's GitHub</a>
+          <NavLink href="https://github.com/jbarton0/startup-example" style={{color: 'black'}}>Jacqueline Barton's GitHub</NavLink>
           <span className="badge text-bg-light">New Rating Submitted</span>
         </footer>
     </BrowserRouter>

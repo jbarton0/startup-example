@@ -37,7 +37,7 @@ export default function App() {
       </Routes>
 
       <footer className="fixed-bottom p-3 d-flex justify-content-between align-items-center">
-          <NavLink href="https://github.com/jbarton0/startup-example" style={{color: 'black'}}>Jacqueline Barton's GitHub</NavLink>
+          <a href="https://github.com/jbarton0/startup-example" style={{color: 'black'}}>Jacqueline Barton's GitHub</a>
           <span className="badge text-bg-light">New Rating Submitted</span>
         </footer>
     </BrowserRouter>

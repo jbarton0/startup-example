@@ -30,7 +30,11 @@ export default function App() {
         </nav>
       </header>
 
-      <main>App components go here</main>
+      <Routes>
+        <Route path='/' element={<Login />} exact />
+        <Route path='/main' element={<Main />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
 
       <footer className="fixed-bottom p-3 d-flex justify-content-between align-items-center">
           <NavLink href="https://github.com/jbarton0/startup-example" style={{color: 'black'}}>Jacqueline Barton's GitHub</NavLink>
@@ -38,4 +42,8 @@ export default function App() {
         </footer>
     </BrowserRouter>
   );
+}
+
+function NotFound() {
+  return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
 }

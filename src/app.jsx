@@ -19,10 +19,10 @@ export default function App() {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <NavLink className="nav-link" aria-current="page" to="login.html">Login</NavLink>
+                  <NavLink className="nav-link" aria-current="page" to="/">Login</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="main.html">Main</NavLink>
+                  <NavLink className="nav-link" to="/main">Main</NavLink>
                 </li>
               </ul>
             </div>

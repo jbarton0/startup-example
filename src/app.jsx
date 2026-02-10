@@ -2,10 +2,13 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './app.css';
+import { Login } from './login/login';
+import { Main } from './main/main';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 
 export default function App() {
   return (
-    <div>
+    <BrowserRouter>
       <header>
         <nav className="navbar navbar-expand-lg fixed-top" data-bs-theme="light">
           <div className="container-fluid">
@@ -33,6 +36,6 @@ export default function App() {
           <a href="https://github.com/jbarton0/startup-example" style={{color: 'black'}}>Jacqueline Barton's GitHub</a>
           <span className="badge text-bg-light">New Rating Submitted</span>
         </footer>
-    </div>
+    </BrowserRouter>
   );
 }

@@ -14,14 +14,13 @@ export function Login({ userName, authState, onAuthChange }) {
         localStorage.setItem('userName', email);
         onAuthChange(email, AuthState.Authenticated);
         }
-    }
 
   return (
     <main id="login" className="d-flex flex-column align-items-center mt-4">
         <form className="text-center" onSubmit={loginUser}>
             <h2>Login</h2>
             <div className="mb-3">
-                <input type="email" placeholder="Username" className="form-control mb-3" value={email} onChange={(e) => setEmail(e.target.value)}/></div>
+                <input type="email" placeholder="Email" className="form-control mb-3" value={email} onChange={(e) => setEmail(e.target.value)}/></div>
             <div className="mb-3">
                 <input type="password" placeholder="Password" className="form-control mb-3" id="exampleInputPassword1"/>
             </div>
@@ -30,3 +29,4 @@ export function Login({ userName, authState, onAuthChange }) {
         <img src={imageUrl} className="mx-auto d-block mt-5" alt="random image of food" width="150" height="150"/>
     </main>
   );
+}

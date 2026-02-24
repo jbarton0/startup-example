@@ -1,26 +1,26 @@
 import React from 'react';
+//import {authState} from './authState';
 
-export function Login() {
+export function Login(/*{ userName, authState, onAuthChange }*/) {
     const [imageUrl, setImageUrl] = React.useState('');
+    //const [email, setEmail] = React.useState(userName || '');
 
     React.useEffect( () => {
         setImageUrl(`https://images.pexels.com/photos/1161682/pexels-photo-1161682.jpeg`);
     }, []);
 
-    /* from tutorial video:
+    /*
     function loginUser({setUser}) {
-        const [text, setText] = React.useState('');
-        function loginUser() {
-            localStorage.setItem('user', text);
-            setUser(text);
+        localStorage.setItem('userName', email);
+        onAuthChange(email, AuthState.Authenticated);
         }
     }*/
   return (
     <main id="login" className="d-flex flex-column align-items-center mt-4">
-        <form method="get" action="main.html" className="text-center">
+        <form method="get" action="main.html" className="text-center" /*onSubmit={loginUser}*/>
             <h2>Login</h2>
             <div className="mb-3">
-                <input type="email" placeholder="Username" className="form-control mb-3" id="exampleInputEmail1" aria-describedby="emailHelp"/></div>
+                <input type="email" placeholder="Username" className="form-control mb-3" id="exampleInputEmail1"/*value={email} onChange={(e) => setEmail(e.target.value)}*/ aria-describedby="emailHelp"/></div>
             <div className="mb-3">
                 <input type="password" placeholder="Password" className="form-control mb-3" id="exampleInputPassword1"/>
             </div>

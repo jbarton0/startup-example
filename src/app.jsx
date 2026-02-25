@@ -5,12 +5,13 @@ import './app.css';
 import { Login } from './login/login';
 import { Main } from './main/main';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
-//import { AuthState } from './login/authState';
+import { AuthState } from './login/authState';
 
 export default function App() {
-  /*const [userName, setUserName] = React.useState(localStorage.getItem('userName') || 'null');
+  const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
   const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
-  const [authState, setAuthState] = React.useState(currentAuthState);*/
+  const [authState, setAuthState] = React.useState(currentAuthState);
+
   return (
     <BrowserRouter>
       <header>
@@ -22,16 +23,16 @@ export default function App() {
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
-              {/* {authState === AuthState.Authenticated && ( */}
+              {authState === AuthState.Authenticated && (
                 <li className="nav-item">
                   <NavLink className="nav-link" aria-current="page" to="/">Login</NavLink>
                 </li>
-              {/* )}; */}
-              {/* {authState === AuthState.Authenticated && ( */}
+              )}
+              {authState === AuthState.Authenticated && (
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/main">Main</NavLink>
                 </li>
-              {/* )}; */}
+              )}
               </ul>
             </div>
           </div>
@@ -40,13 +41,13 @@ export default function App() {
 
       <Routes>
         <Route path='/' element={
-          <Login /* 
+          <Login
             userName={userName} 
             authState={authState} 
-            onAuthchange={(userName,authState) => {
+            onAuthChange={(userName,authState) => {
               setAuthState(authState); 
               setUserName(userName);
-            }}*/
+            }}
           />
           } 
           exact />
@@ -65,5 +66,3 @@ export default function App() {
 function NotFound() {
   return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
 }
-
-//export default App;

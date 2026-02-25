@@ -1,18 +1,21 @@
 import React from 'react';
 import {AuthState} from './authState';
+import { useNavigate } from 'react-router-dom';
 
 export function Login({ userName, authState, onAuthChange }) {
-    const [imageUrl, setImageUrl] = React.useState('');
+    const navigate = useNavigate();
+    const [imageUrl, setImageUrl] = React.useState('https://images.pexels.com/photos/1161682/pexels-photo-1161682.jpeg');
     const [email, setEmail] = React.useState(userName || '');
 
     React.useEffect( () => {
-        setImageUrl(`https://images.pexels.com/photos/1161682/pexels-photo-1161682.jpeg`);
+        setImageUrl('https://images.pexels.com/photos/1161682/pexels-photo-1161682.jpeg');
     }, []);
 
     function loginUser(e) {
         e.preventDefault();
         localStorage.setItem('userName', email);
         onAuthChange(email, AuthState.Authenticated);
+        navigate('/main')
         }
 
   return (

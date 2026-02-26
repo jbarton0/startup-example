@@ -11,6 +11,26 @@ export default function App() {
   const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
   const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
   const [authState, setAuthState] = React.useState(currentAuthState);
+  const [isActive, setIsActive] = React.useState(false);
+
+  
+  React.useEffect(() => {
+    let timeoutId;
+
+    const interval = setInterval(() => {
+      setIsActive(true);
+      
+      timeoutId = setTimeout(() => {
+        setIsActive(false);
+      }, 1000);
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeoutId);
+    }
+  }, []);
+
 
   return (
     <BrowserRouter>
@@ -58,7 +78,8 @@ export default function App() {
 
       <footer className="fixed-bottom p-3 d-flex justify-content-between align-items-center">
           <a href="https://github.com/jbarton0/startup-example" style={{color: 'black'}}>Jacqueline Barton's GitHub</a>
-          <span className="badge text-bg-light">New Rating Submitted</span>
+          <span className={`badge ${isActive ? 'pulse' : ''}`}>New Rating Submitted</span>
+          {/*text-bg-light*/}
         </footer>
     </BrowserRouter>
   );

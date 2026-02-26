@@ -55,6 +55,27 @@ main {
     width: 250px;
 }
 
+@keyframes pulse {
+  0% {
+    background-color: #f8f9fa;
+  }
+  50% {
+    background-color: #edbc51;
+  }
+  100% {
+    background-color: #f8f9fa;
+  }
+}
+
+.badge {
+  background-color: #f8f9fa;
+  color: black;
+}
+
+.badge.pulse {
+  animation: pulse 0.9s ease-in-out;
+}
+
 .fixed-bottom {
     background-color: #f0d7a9;
 }

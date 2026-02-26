@@ -48,10 +48,11 @@ export default function App() {
               setAuthState(authState); 
               setUserName(userName);
             }}
+            setUserName={setUserName}
           />
           } 
           exact />
-        <Route path='/main' element={<Main />} />
+        <Route path='/main' element={<Main userName={userName}/>} />
         <Route path='*' element={<NotFound />} />
       </Routes>
 

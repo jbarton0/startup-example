@@ -29,8 +29,16 @@ export function Main() {
             </div>
             <br></br>
 
-            <div className="card m-4" style={{ width: '15rem' }}>
-                <img src="https://thegirlonbloor.com/wp-content/uploads/2019/04/Meal-Prep-Chicken-Enchiladas-Verdes-6.jpg" alt="Chicken Enchiladas" className="card-img-top" height="150"></img>
+            <div>
+
+                <RecipeCard
+                title="Chicken Enchiladas"
+                link="https://thegirlonbloor.com/meal-prep-chicken-enchiladas-verdes/"
+                rating="7.4"
+                imgSrc="https://thegirlonbloor.com/wp-content/uploads/2019/04/Meal-Prep-Chicken-Enchiladas-Verdes-6.jpg"
+                />
+
+                {/* <img src="https://thegirlonbloor.com/wp-content/uploads/2019/04/Meal-Prep-Chicken-Enchiladas-Verdes-6.jpg" alt="Chicken Enchiladas" className="card-img-top" height="150"></img>
                 <div className="card-body">
                     <a href="https://www.budgetbytes.com/easiest-burrito-bowl-meal-prep/" style={{ color: "goldenrod" }}>Chicken Enchiladas</a>
                     <p className="card-text small">Submitted by ____</p>
@@ -43,7 +51,7 @@ export function Main() {
                             <input type="text" className="form-control" placeholder="Enter a Number 1-10"></input>
                         </ul>
                     </div>
-                </div>
+                </div> */}
             </div>
 
         </main>

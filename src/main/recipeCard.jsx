@@ -17,7 +17,7 @@ export default function RecipeCard ({ title, link, rating, imgSrc, userName }) {
                     <span style={{ color: "brown" }}>Rating: { rating }</span>
                     
                     {userRating && (
-                        <p>{ userName } rated { userRating }</p>
+                        <p>{ userName.split('@') } rated { userRating }</p>
                     )}
                    
                     <div>

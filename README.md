@@ -25,7 +25,6 @@ We all know that life gets really busy. So much so that finding time to take car
 - See average ratings
 
 ### Technologies
-
 I will use the required technologies in the following ways.
 
 - **HTML** - One page for login and one main page with voting. Hyperlinks to submitted recipes in titles.
@@ -59,3 +58,16 @@ For this deliverable, I used CSS to design my startup.
 - [x] **Spacing** - Margin and padding help even out the main structure.
 - [x] **Cards** - I used Bootstrap cards for my recipe submissions.
 - [x] **Forms** - Bootstrap forms create my login structure and input rating dropdowns.
+
+## React Pt. 1: Routing Deliverable
+
+- [x] Deliverable prerequisites (Git commits, Simon deployed, Github link)
+- [x] **Bundled using Vite**
+- [x] **Components**
+- [x] **Router**
+
+## React Pt. 2: Reactivity Deliverable
+
+- [x] Deliverable prerequisites (Git commits, Simon deployed, Github link)
+- [x] **All functionality implemented or mocked out** - login, navigation after authentication, display new ratings with username, new recipe submissions saved in local storage, New Recipe Submitted button flashing for Websocket placeholder
+- [x] **Hooks** - Both useState and useReact hooks used in startup

@@ -13,7 +13,6 @@ export default function App() {
   const [authState, setAuthState] = React.useState(currentAuthState);
   const [isActive, setIsActive] = React.useState(false);
 
-  
   React.useEffect(() => {
     let timeoutId;
 
@@ -79,7 +78,6 @@ export default function App() {
       <footer className="fixed-bottom p-3 d-flex justify-content-between align-items-center">
           <a href="https://github.com/jbarton0/startup-example" style={{color: 'black'}}>Jacqueline Barton's GitHub</a>
           <span className={`badge ${isActive ? 'pulse' : ''}`}>New Rating Submitted</span>
-          {/*text-bg-light*/}
         </footer>
     </BrowserRouter>
   );

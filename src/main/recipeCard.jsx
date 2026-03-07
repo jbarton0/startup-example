@@ -2,11 +2,26 @@ import React from 'react';
 
 export default function RecipeCard ({ title, link, rating, imgSrc, userName }) {
 
-    const [userRating, setRating] = React.useState(null);
+    const storageKey = `rating-${title}-${userName}`;
+    const [userRating, setRating] = React.useState(() => {
+        return localStorage.getItem(storageKey) || null;
+    });
+
+    React.useEffect(() => {
+        if (userRating !== null) {
+            localStorage.setItem(storageKey, userRating);
+        }
+    }, [userRating]);
 
     const enterHandler = (e) => {
-        if (e.key == 'Enter') setRating(e.target.value)
-    }
+        if (e.key == 'Enter') {
+            const value = Number(e.target.value)
+
+            if (value >=1 && value <=10) {
+                setRating(value);
+            }
+        }
+    };
     
     return (
         <div className="card m-4" style={{ width: '15rem' }}>
@@ -25,7 +40,7 @@ export default function RecipeCard ({ title, link, rating, imgSrc, userName }) {
                             New Rating
                         </button>
                         <ul className="dropdown-menu">
-                            <input type="text" className="form-control" placeholder="Enter a Number 1-10" onKeyDown={(e) => enterHandler(e)}></input>
+                            <input type="number" min="1" max="10" className="form-control" placeholder="Enter a Number 1-10" onKeyDown={(e) => enterHandler(e)}></input>
                         </ul>
                     </div>
                 </div>

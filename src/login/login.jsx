@@ -6,6 +6,7 @@ export function Login({ userName, authState, onAuthChange, setUserName }) {
     const navigate = useNavigate();
     const [imageUrl, setImageUrl] = React.useState('https://images.pexels.com/photos/1161682/pexels-photo-1161682.jpeg');
     const [email, setEmail] = React.useState(userName || '');
+    const [password, setPassword] = React.useState(password || '');
 
     React.useEffect( () => {
         setImageUrl('https://images.pexels.com/photos/1161682/pexels-photo-1161682.jpeg');
@@ -23,16 +24,22 @@ export function Login({ userName, authState, onAuthChange, setUserName }) {
         navigate('/main')
         }
 
+    function createUser(e) {
+        e.preventDefault();
+
+    }
+
   return (
     <main id="login" className="d-flex flex-column align-items-center mt-4">
-        <form className="text-center" onSubmit={loginUser}>
+        <form className="text-center">
             <h2>Login</h2>
             <div className="mb-3">
                 <input type="email" placeholder="Email" className="form-control mb-3" value={email} onChange={(e) => emailHandler(e)}/></div>
             <div className="mb-3">
-                <input type="password" placeholder="Password" className="form-control mb-3" id="exampleInputPassword1"/>
+                <input type="password" placeholder="Password" className="form-control mb-3" value={password} onChange={(e) => setPassword(e.target.value)}/>
             </div>
-            <button type="submit" className="btn btn-outline-secondary" >Submit</button>
+            <button type="submit" className="btn btn-outline-secondary" onSubmit={loginUser}>Login</button>
+            <button type="submit" className="btn btn-outline-secondary" onSubmit={createUser}>Create</button>
         </form>
         <img src={imageUrl} className="mx-auto d-block mt-5" alt="random image of food" width="150" height="150"/>
     </main>

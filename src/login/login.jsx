@@ -19,14 +19,29 @@ export function Login({ userName, authState, onAuthChange, setUserName }) {
 
     function loginUser(e) {
         e.preventDefault();
-        localStorage.setItem('userName', email);
-        onAuthChange(email, AuthState.Authenticated);
-        navigate('/main')
-        }
+        loginOrCreate(`/api/auth/login`);
+    }
 
     function createUser(e) {
         e.preventDefault();
+        loginOrCreate(`/api/auth/create`);
+    }
 
+    async function loginOrCreate(endpoint) {
+        const response = await fetch(endpoint, {
+            method: 'post',
+            body: JSON.stringify({ email: userName, password: password }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        });
+        if (response?.status === 200) {
+            localStorage.setItem('userName', userName);
+            props.onLogin(userName);
+        } else {
+            const body = await response.json();
+            setDisplayError(`Error: ${body.msg}`);
+        }
     }
 
   return (

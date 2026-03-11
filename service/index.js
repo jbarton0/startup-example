@@ -16,6 +16,24 @@ app.use(`/api`, apiRouter);
 
 let users = [];
 
+async function findUser(field, value) {
+  if (!value) return null;
+  return users.find((u) => u[field] === value);
+}
+
+async function createUser(email, password) {
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  const user = {
+    email: email,
+    password: passwordHash,
+    token: uuid.v4(),
+  };
+  users.push(user);
+
+  return user;
+}
+
 apiRouter.post('/auth/create', async (req, res) => {
   if (await findUser('email', req.body.email)) {
     console.log("Existing user")
@@ -37,15 +55,4 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
-async function createUser(email, password) {
-  const passwordHash = await bcrypt.hash(password, 10);
 
-  const user = {
-    email: email,
-    password: passwordHash,
-    token: uuid.v4(),
-  };
-  users.push(user);
-
-  return user;
-}

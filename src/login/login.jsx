@@ -6,7 +6,7 @@ export function Login({ userName, authState, onAuthChange, setUserName }) {
     const navigate = useNavigate();
     const [imageUrl, setImageUrl] = React.useState('https://images.pexels.com/photos/1161682/pexels-photo-1161682.jpeg');
     const [email, setEmail] = React.useState(userName || '');
-    const [password, setPassword] = React.useState(password || '');
+    const [password, setPassword] = React.useState('');
 
     React.useEffect( () => {
         setImageUrl('https://images.pexels.com/photos/1161682/pexels-photo-1161682.jpeg');
@@ -23,8 +23,9 @@ export function Login({ userName, authState, onAuthChange, setUserName }) {
     }
 
     function createUser(e) {
+        console.log("inside create user")
         e.preventDefault();
-        loginOrCreate(`/api/auth/create`);
+        loginOrCreate(`http://localhost:4000/api/auth/create`);
     }
 
     async function loginOrCreate(endpoint) {
@@ -35,6 +36,7 @@ export function Login({ userName, authState, onAuthChange, setUserName }) {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         });
+        console.log(response);
         if (response?.status === 200) {
             localStorage.setItem('userName', userName);
             props.onLogin(userName);
@@ -53,8 +55,8 @@ export function Login({ userName, authState, onAuthChange, setUserName }) {
             <div className="mb-3">
                 <input type="password" placeholder="Password" className="form-control mb-3" value={password} onChange={(e) => setPassword(e.target.value)}/>
             </div>
-            <button type="submit" className="btn btn-outline-secondary" onSubmit={loginUser}>Login</button>
-            <button type="submit" className="btn btn-outline-secondary" onSubmit={createUser}>Create</button>
+            <button type="submit" className="btn btn-outline-secondary" onClick={loginUser}>Login</button>
+            <button type="submit" className="btn btn-outline-secondary" onClick={createUser}>Create</button>
         </form>
         <img src={imageUrl} className="mx-auto d-block mt-5" alt="random image of food" width="150" height="150"/>
     </main>

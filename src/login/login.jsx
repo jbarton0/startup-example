@@ -55,8 +55,8 @@ export function Login({ userName, authState, onAuthChange, setUserName }) {
             <div className="mb-3">
                 <input type="password" placeholder="Password" className="form-control mb-3" value={password} onChange={(e) => setPassword(e.target.value)}/>
             </div>
-            <button type="submit" className="btn btn-outline-secondary" onClick={loginUser}>Login</button>
-            <button type="submit" className="btn btn-outline-secondary" onClick={createUser}>Create</button>
+            <button type="submit" className="btn btn-outline-secondary m-1" onClick={loginUser}>Login</button>
+            <button type="submit" className="btn btn-outline-secondary m-1" onClick={createUser}>Create</button>
         </form>
         <img src={imageUrl} className="mx-auto d-block mt-5" alt="random image of food" width="150" height="150"/>
     </main>

@@ -19,13 +19,13 @@ export function Login({ userName, authState, onAuthChange, setUserName }) {
 
     function loginUser(e) {
         e.preventDefault();
-        loginOrCreate(`/api/auth/login`);
+        loginOrCreate('/api/auth/login');
     }
 
     function createUser(e) {
         console.log("inside create user")
         e.preventDefault();
-        loginOrCreate(`http://localhost:4000/api/auth/create`);
+        loginOrCreate('/api/auth/create');
     }
 
     async function loginOrCreate(endpoint) {

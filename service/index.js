@@ -12,7 +12,7 @@ app.use(cookieParser());
 app.use(express.static('public'));
 
 var apiRouter = express.Router();
-app.use(`/api`, apiRouter);
+app.use('/api', apiRouter);
 
 let users = [];
 
@@ -29,9 +29,18 @@ async function createUser(email, password) {
     password: passwordHash,
     token: uuid.v4(),
   };
+  
   users.push(user);
-
   return user;
+}
+
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    maxAge: 1000 * 60 * 60 * 24 * 365,
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
 }
 
 apiRouter.post('/auth/create', async (req, res) => {
@@ -45,6 +54,10 @@ apiRouter.post('/auth/create', async (req, res) => {
     setAuthCookie(res, user.token);
     res.send({ email: user.email });
   }
+});
+
+app.use(function (err, req, res, next) {
+  res.status(500).send({ type: err.name, message: err.message });
 });
 
 app.use((_req, res) => {

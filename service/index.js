@@ -16,6 +16,7 @@ app.use('/api', apiRouter);
 
 let users = [];
 
+//Helper functions
 async function findUser(field, value) {
   if (!value) return null;
   return users.find((u) => u[field] === value);
@@ -43,6 +44,7 @@ function setAuthCookie(res, authToken) {
   });
 }
 
+//Create user endpoint
 apiRouter.post('/auth/create', async (req, res) => {
   if (await findUser('email', req.body.email)) {
     console.log("Existing user")
@@ -56,6 +58,21 @@ apiRouter.post('/auth/create', async (req, res) => {
   }
 });
 
+// Login user endpoint
+apiRouter.post('/auth/login', async (req, res) => {
+  const user = await findUser('email', req.body.email);
+  if (user) {
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      user.token = uuid.v4();
+      setAuthCookie(res, user.token);
+      res.send({ email: user.email });
+      return;
+    }
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+});
+
+//Error handling
 app.use(function (err, req, res, next) {
   res.status(500).send({ type: err.name, message: err.message });
 });

@@ -28,6 +28,19 @@ export function Login({ userName, authState, onAuthChange, setUserName }) {
         loginOrCreate('/api/auth/create');
     }
 
+    function logoutUser() {
+        fetch('/api/auth/logout', {
+            method: 'delete',
+        })
+        .catch(() => {
+            // Logout failed. Assuming offline
+        })
+        .finally(() => {
+            localStorage.removeItem('userName');
+            onAuthChange('', AuthState.Unauthenticated);
+        });
+    }
+
     async function loginOrCreate(endpoint) {
         const response = await fetch(endpoint, {
             method: 'post',
@@ -55,8 +68,15 @@ export function Login({ userName, authState, onAuthChange, setUserName }) {
             <div className="mb-3">
                 <input type="password" placeholder="Password" className="form-control mb-3" value={password} onChange={(e) => setPassword(e.target.value)}/>
             </div>
-            <button type="submit" className="btn btn-outline-secondary m-1" onClick={loginUser}>Login</button>
-            <button type="submit" className="btn btn-outline-secondary m-1" onClick={createUser}>Create</button>
+            {authState === AuthState.Unauthenticated && (
+                <div>
+                    <button type="button" className="btn btn-outline-secondary m-1" onClick={loginUser}>Login</button>
+                    <button type="button" className="btn btn-outline-secondary m-1" onClick={createUser}>Create</button>
+                </div>
+            )}
+            {authState === AuthState.Authenticated && (
+                <button type="button" className="btn btn-outline-secondary" onClick={logoutUser}>Logout</button>
+            )}
         </form>
         <img src={imageUrl} className="mx-auto d-block mt-5" alt="random image of food" width="150" height="150"/>
     </main>

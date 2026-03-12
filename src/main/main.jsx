@@ -7,6 +7,7 @@ export function Main({ userName }) {
     const [showModal, setShowModal] = React.useState(false);
     const [input1, setInput1] = React.useState(localStorage.getItem('newRecipeName') || '');
     const [input2, setInput2] = React.useState(localStorage.getItem('newRecipeLink') || '');
+    const [input3, setInput3] = React.useState(localStorage.getItem('newImgLink') || '');
     const [recipes, setRecipes] = React.useState([]);
 
     function displayModal() {
@@ -106,6 +107,13 @@ return (
                                 onChange={(e) => setInput2(e.target.value)}
                                 className="modal-input"
                             />
+                            <input
+                                type="text"
+                                placeholder="Image Link"
+                                value={input2}
+                                onChange={(e) => setInput3(e.target.value)}
+                                className="modal-input"
+                            />
                         </div>
 
                     </div>
@@ -118,7 +126,7 @@ return (
                     >
                         Cancel
                     </button>
-                    <button type="button" className="btn btn-dark" onClick={() => {saveInputs(); setShowModal(false); setInput1(''); setInput2('');}}>
+                    <button type="button" className="btn btn-dark" onClick={() => {submitRecipe(); setShowModal(false); setInput1(''); setInput2(''); setInput3('');}}>
                         Submit
                     </button>
                     </div>

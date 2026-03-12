@@ -1,11 +1,13 @@
 import React from 'react';
 import RecipeCard from './RecipeCard';
 import '../app.css';
+//import recipes from '../../service/index.js'
 
 export function Main({ userName }) {
     const [showModal, setShowModal] = React.useState(false);
     const [input1, setInput1] = React.useState(localStorage.getItem('newRecipeName') || '');
     const [input2, setInput2] = React.useState(localStorage.getItem('newRecipeLink') || '');
+    const [recipes, setRecipes] = React.useState([]);
 
     function displayModal() {
         setShowModal(true)
@@ -15,6 +17,15 @@ export function Main({ userName }) {
         localStorage.setItem('newRecipeName', input1);
         localStorage.setItem('newRecipeLink', input2);
     }
+
+    React.useEffect(() => {
+        async function loadRecipes() {
+            const response = await fetch('/api/recipes');
+            const data = await response.json();
+            setRecipes(data);
+        }
+        loadRecipes();
+    }, []);
 
 
 return (

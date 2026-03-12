@@ -97,6 +97,11 @@ apiRouter.post('/recipes', (req, res) => {
   res.send(recipe);
 });
 
+//Get saved recipes endpoint
+apiRouter.get('/recipes', (req, res) => {
+  res.send(recipes);
+});
+
 //Error handling
 app.use(function (err, req, res, next) {
   res.status(500).send({ type: err.name, message: err.message });

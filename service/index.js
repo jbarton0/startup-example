@@ -15,6 +15,7 @@ var apiRouter = express.Router();
 app.use('/api', apiRouter);
 
 let users = [];
+let recipes = [];
 
 //Helper functions
 async function findUser(field, value) {
@@ -80,6 +81,20 @@ apiRouter.delete('/auth/logout', async (req, res) => {
   }
   res.clearCookie(authCookieName);
   res.status(204).end();
+});
+
+//Save new recipe endpoint
+apiRouter.post('/recipes', (req, res) => {
+  const recipe = {
+    id: uuid.v4(),
+    title: req.body.title,
+    link: req.body.link,
+    rating: req.body.rating,
+    imgSrc: req.body.imgSrc,
+    userName: req.body.userName
+  };
+  recipes.push(recipe);
+  res.send(recipe);
 });
 
 //Error handling

@@ -7,6 +7,7 @@ export function Login({ userName, authState, onAuthChange, setUserName }) {
     const [imageUrl, setImageUrl] = React.useState('https://images.pexels.com/photos/1161682/pexels-photo-1161682.jpeg');
     const [email, setEmail] = React.useState(userName || '');
     const [password, setPassword] = React.useState('');
+    const [displayError, setDisplayError] = React.useState('');
 
     React.useEffect( () => {
         setImageUrl('https://images.pexels.com/photos/1161682/pexels-photo-1161682.jpeg');
@@ -44,15 +45,15 @@ export function Login({ userName, authState, onAuthChange, setUserName }) {
     async function loginOrCreate(endpoint) {
         const response = await fetch(endpoint, {
             method: 'post',
-            body: JSON.stringify({ email: userName, password: password }),
+            body: JSON.stringify({ email: email, password: password }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         });
         console.log(response);
         if (response?.status === 200) {
-            localStorage.setItem('userName', userName);
-            props.onLogin(userName);
+            localStorage.setItem('userName', email);
+            onAuthChange(email, AuthState.Authenticated);
         } else {
             const body = await response.json();
             setDisplayError(`Error: ${body.msg}`);

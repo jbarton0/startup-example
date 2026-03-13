@@ -48,18 +48,17 @@ export function Main({ userName }) {
 return (
     <div>
         <main id="main_" className="d-flex justify-content-center flex-wrap">
-            <div>
-                {recipes.map((recipe) => (
-                    <RecipeCard 
-                    key={recipe.id}
-                    title={recipe.title}
-                    link={recipe.link}
-                    rating={recipe.rating}
-                    imgSrc={recipe.imgSrc}
-                    userName={userName}
-                    />
-                ))}
-            </div>
+            
+            {recipes.map((recipe) => (
+                <RecipeCard 
+                key={recipe.id}
+                title={recipe.title}
+                link={recipe.link}
+                rating={recipe.rating}
+                imgSrc={recipe.imgSrc}
+                userName={userName}
+                />
+            ))}
 
         </main>
         <div className="d-flex justify-content-center">

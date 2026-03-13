@@ -71,3 +71,14 @@ For this deliverable, I used CSS to design my startup.
 - [x] Deliverable prerequisites (Git commits, Simon deployed, Github link)
 - [x] **All functionality implemented or mocked out** - login, navigation after authentication, display new ratings with username, new recipe submissions saved in local storage, New Recipe Submitted button flashing for Websocket placeholder
 - [x] **Hooks** - Both useState and useReact hooks used in startup
+
+## Service Deliverable
+
+- [x] Deliverable prerequisites (Git commits, Simon deployed, Github link)
+- [x] **Node.js/Express HTTP service** - I installed Express and used a default port of 4000
+- [x] **Static middleware for frontend** - Endpoints in `service/index.js`
+- [x] **Calls to third party endpoints** - Made a call to `https://foodish-api.com/` for a random image of food on the login page.
+- [x] **Backend service endpoints** - Endpoints for login, logout, recipe handling
+- [x] **Frontend calls service endpoints** - Mocked frontend functionality replaced with calls to service.
+- [x] **Supports registration, login, logout, and restricted endpoint** - Fully support authentication and restrict access to recipes.
+- [x] **Uses BCrypt to hash passwords** - I completed this part of the deliverable.

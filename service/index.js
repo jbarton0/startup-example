@@ -70,6 +70,15 @@ function setAuthCookie(res, authToken) {
   });
 }
 
+const verifyAuth = async (req, res, next) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    next();
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+};
+
 //Create user endpoint
 apiRouter.post('/auth/create', async (req, res) => {
   if (await findUser('email', req.body.email)) {
@@ -109,7 +118,7 @@ apiRouter.delete('/auth/logout', async (req, res) => {
 });
 
 //Save new recipe endpoint
-apiRouter.post('/recipes', (req, res) => {
+apiRouter.post('/recipes', verifyAuth, (req, res) => {
   const recipe = {
     id: uuid.v4(),
     title: req.body.title,
@@ -123,7 +132,7 @@ apiRouter.post('/recipes', (req, res) => {
 });
 
 //Get saved recipes endpoint
-apiRouter.get('/recipes', (req, res) => {
+apiRouter.get('/recipes', verifyAuth, (req, res) => {
   res.send(recipes);
 });
 

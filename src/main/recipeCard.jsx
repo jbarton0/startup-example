@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function RecipeCard ({ title, link, rating, imgSrc, userName }) {
+    // add weight for rating (ex number of people that have rated the recipe)
 
     const storageKey = `rating-${title}-${userName}`;
     const [userRating, setRating] = React.useState(() => {
@@ -10,6 +11,7 @@ export default function RecipeCard ({ title, link, rating, imgSrc, userName }) {
     React.useEffect(() => {
         if (userRating !== null) {
             localStorage.setItem(storageKey, userRating);
+
         }
     }, [userRating]);
 

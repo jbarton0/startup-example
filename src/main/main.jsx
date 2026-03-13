@@ -25,7 +25,7 @@ export function Main({ userName }) {
         const response = await fetch('/api/recipes', {
             method: 'POST',
             headers: {
-                'Content/type': 'application/json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(recipe),
         });
@@ -61,7 +61,7 @@ return (
             ))}
 
         </main>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center mb-5">
         <button type="button" className="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModalCenter" onClick={(e) => displayModal(e)}>
         Submit New Recipe
         </button>
@@ -100,7 +100,7 @@ return (
                             <input
                                 type="text"
                                 placeholder="Image Link"
-                                value={input2}
+                                value={input3}
                                 onChange={(e) => setInput3(e.target.value)}
                                 className="modal-input"
                             />

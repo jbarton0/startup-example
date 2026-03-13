@@ -43,12 +43,12 @@
 
 #main_ {
   padding-top: 100px;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
   font-family: "Work Sans", sans-serif;
 }
 
 main {
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 .form-control {

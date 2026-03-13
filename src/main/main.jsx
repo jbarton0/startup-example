@@ -14,9 +14,28 @@ export function Main({ userName }) {
         setShowModal(true)
     }
 
-    const saveInputs = () => {
-        localStorage.setItem('newRecipeName', input1);
-        localStorage.setItem('newRecipeLink', input2);
+    const submitRecipe = async () => {
+        const recipe = {
+            title: input1,
+            link: input2,
+            rating: "N/A",
+            imgSrc: input3,
+            userName: userName,
+        };
+
+        const response = await fetch('/api/recipes', {
+            method: 'POST',
+            headers: {
+                'Content/type': 'application/json',
+            },
+            body: JSON.stringify(recipe),
+        });
+
+        const savedRecipe = await response.json();
+
+        setRecipes((prev) => [...prev, savedRecipe]);
+        // localStorage.setItem('newRecipeName', input1);
+        // localStorage.setItem('newRecipeLink', input2);
     }
 
     React.useEffect(() => {

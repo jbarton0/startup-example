@@ -127,6 +127,16 @@ apiRouter.get('/recipes', (req, res) => {
   res.send(recipes);
 });
 
+//Get random image endpoint
+apiRouter.get('/random-food', async (req, res) => {
+  const response = await fetch('https://foodish-api.com/api/');
+  const data = await response.json();
+
+  res.send({
+    imgSrc: data.image
+  });
+});
+
 //Error handling
 app.use(function (err, req, res, next) {
   res.status(500).send({ type: err.name, message: err.message });

@@ -4,14 +4,19 @@ import { useNavigate } from 'react-router-dom';
 
 export function Login({ userName, authState, onAuthChange, setUserName }) {
     const navigate = useNavigate();
-    const [imageUrl, setImageUrl] = React.useState('https://images.pexels.com/photos/1161682/pexels-photo-1161682.jpeg');
+    const [imageUrl, setImageUrl] = React.useState(null);
     const [email, setEmail] = React.useState(userName || '');
     const [password, setPassword] = React.useState('');
     const [displayError, setDisplayError] = React.useState('');
 
-    React.useEffect( () => {
-        setImageUrl('https://images.pexels.com/photos/1161682/pexels-photo-1161682.jpeg');
-    }, []);
+    React.useEffect(() => {
+        async function fetchRandomFood() {
+            const response = await fetch('https://foodish-api.com/api/');
+            const data = await response.json();
+            setImageUrl(data.image); // update state with random food image
+        }
+        fetchRandomFood();
+    }, [])
 
     const emailHandler = (e) => {
         setEmail(e.target.value);

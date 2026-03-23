@@ -71,7 +71,7 @@ export default function App() {
           />
           } 
           exact />
-        <Route path='/main' element={<Main userName={userName}/>} />
+        <Route path='/main' element={<Main userName={userName}/>} exact />
         <Route path='*' element={<NotFound />} />
       </Routes>
 

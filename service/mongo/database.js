@@ -86,10 +86,17 @@ async function addRecipe(recipe) {
   await recipeCollection.insertOne(recipe);
 }
 
+async function getRecipes() {
+  const cursor = recipeCollection.find({});
+  return cursor.toArray();
+}
+
 module.exports = {
   addUser,
   getUser,
   getUserByToken,
   updateUser,
   updateUserRemoveAuth,
+  addRecipe,
+  getRecipes,
 };

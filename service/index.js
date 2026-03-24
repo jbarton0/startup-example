@@ -111,7 +111,8 @@ apiRouter.post('/recipes', verifyAuth, async (req, res) => {
 });
 
 //Get saved recipes endpoint
-apiRouter.get('/recipes', verifyAuth, (req, res) => {
+apiRouter.get('/recipes', verifyAuth, async (req, res) => {
+  const recipes = await db.getRecipes();
   res.send(recipes);
 });
 

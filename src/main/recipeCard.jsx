@@ -4,6 +4,7 @@ export default function RecipeCard ({ title, link, rating, imgSrc, userName }) {
     // add weight for rating (ex number of people that have rated the recipe)
 
     const storageKey = `rating-${title}-${userName}`;
+    const [avgRating, setAvgRating] = React.useState(rating);
     const [userRating, setRating] = React.useState(() => {
         return localStorage.getItem(storageKey) || null;
     });
@@ -15,12 +16,27 @@ export default function RecipeCard ({ title, link, rating, imgSrc, userName }) {
         }
     }, [userRating]);
 
-    const enterHandler = (e) => {
+    const enterHandler = async (e) => {
         if (e.key == 'Enter') {
             const value = Number(e.target.value)
 
             if (value >=1 && value <=10) {
                 setRating(value);
+
+                const response = await fetch('/api/recipes/rate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    title,
+                    rating: value,
+                }),
+            });
+
+            const data = await response.json();
+            setAvgRating(data.average);
             }
         }
     };
@@ -31,7 +47,7 @@ export default function RecipeCard ({ title, link, rating, imgSrc, userName }) {
                 <div className="card-body">
                     <a href={ link } style={{ color: "goldenrod" }}>{ title }</a>
                     <p className="card-text small">Submitted by ____</p>
-                    <span style={{ color: "brown" }}>Rating: { rating }</span>
+                    <span style={{ color: "brown" }}>Rating: { avgRating ? avgRating.toFixed(1) : "N/A" }</span>
                     
                     {userRating && (
                         <p>{ userName.split('@')[0] } rated { userRating }</p>

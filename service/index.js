@@ -116,6 +116,24 @@ apiRouter.get('/recipes', verifyAuth, async (req, res) => {
   res.send(recipes);
 });
 
+//Submit ratings endpoint
+app.post('/api/recipes/rate', async (req, res) => {
+  const { title, rating } = req.body;
+
+  const recipe = await Recipe.findOne({ title });
+
+  if (!recipe) return res.status(404).send('Recipe not found');
+
+  recipe.totalScore += rating;
+  recipe.numRatings += 1;
+
+  await recipe.save();
+
+  res.json({
+    average: recipe.totalScore / recipe.numRatings
+  });
+});
+
 //Get random image endpoint
 apiRouter.get('/random-food', async (req, res) => {
   const response = await fetch('https://foodish-api.com/api/');

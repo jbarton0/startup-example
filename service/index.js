@@ -106,8 +106,8 @@ apiRouter.post('/recipes', verifyAuth, async (req, res) => {
     imgSrc: req.body.imgSrc,
     userName: req.body.userName
   };
-  await db.addRecipe(recipe);
-  res.send(recipe);
+  const result = await db.addRecipe(recipe);
+  res.send(result);
 });
 
 //Get saved recipes endpoint
@@ -132,7 +132,7 @@ app.use(function (err, req, res, next) {
 });
 
 app.use((_req, res) => {
-  res.sendFile('index.html', {root: 'startup-example'});
+  res.sendFile('index.html', {root: 'public'});
 });
 
 app.listen(port, () => {

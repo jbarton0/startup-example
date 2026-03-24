@@ -83,7 +83,8 @@ async function seedRecipes() {
 }
 
 async function addRecipe(recipe) {
-  await recipeCollection.insertOne(recipe);
+  const result = await recipeCollection.insertOne(recipe);
+  return { ...recipe, _id: result.insertedId };
 }
 
 async function getRecipes() {

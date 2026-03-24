@@ -17,7 +17,7 @@ export function Main({ userName }) {
         const recipe = {
             title: input1,
             link: input2,
-            rating: "N/A",
+            rating: null,
             imgSrc: input3,
             userName: userName,
         };
@@ -37,7 +37,10 @@ export function Main({ userName }) {
 
     React.useEffect(() => {
         async function loadRecipes() {
-            const response = await fetch('/api/recipes');
+            const response = await fetch('/api/recipes', {
+                credentials: 'include',
+            });
+                
             const data = await response.json();
             setRecipes(data);
         }
@@ -51,7 +54,7 @@ return (
             
             {recipes.map((recipe) => (
                 <RecipeCard 
-                key={recipe.id}
+                key={recipe._id}
                 title={recipe.title}
                 link={recipe.link}
                 rating={recipe.rating}

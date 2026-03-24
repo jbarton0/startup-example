@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb');
 const config = require('./dbConfig.json');
-const { getUserByToken } = require('../../../simon-db/service/database');
+const { getUserByToken, updateUserRemoveAuth } = require('../../../simon-db/service/database');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 
@@ -30,6 +30,14 @@ async function main() {
 
   async function getUserByToken(token) {
     return userCollection.findOne({ token: token });
+  }
+
+  async function updateUser(user) {
+    await userCollection.updateOne({ email: user.email }, { $set: user });
+  }
+
+  async function updateUserRemoveAuth(user) {
+    await userCollection.updateOne({ email: user.email }, { $unset: { token: 1 } });
   }
 
   // try {
@@ -65,4 +73,6 @@ module.exports = {
   addUser,
   getUser,
   getUserByToken,
+  updateUser,
+  updateUserRemoveAuth,
 };

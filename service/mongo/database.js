@@ -82,6 +82,10 @@ async function seedRecipes() {
   }
 }
 
+async function addRecipe(recipe) {
+  await recipeCollection.insertOne(recipe);
+}
+
 module.exports = {
   addUser,
   getUser,

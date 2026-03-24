@@ -5,8 +5,9 @@ const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostna
 
 // Connect to the database cluster
 const client = new MongoClient(url);
-const db = client.db('rental');
-const collection = db.collection('house');
+const db = client.db('mealPrep');
+const userCollection = db.collection('user');
+const recipeCollection = db.collection('recipe')
 
 async function main() {
   try {
@@ -18,33 +19,39 @@ async function main() {
     process.exit(1);
   }
 
-  try {
-    // Insert a document
-    const house = {
-      name: 'Beachfront views',
-      summary: 'From your bedroom to the beach, no shoes required',
-      property_type: 'Condo',
-      beds: 1,
-    };
-    await collection.insertOne(house);
-
-    // Query the documents
-    const query = { property_type: 'Condo', beds: { $lt: 2 } };
-    const options = {
-      sort: { name: -1 },
-      limit: 10,
-    };
-    const cursor = collection.find(query, options);
-    const rentals = await cursor.toArray();
-    rentals.forEach((i) => console.log(i));
-
-    // Delete documents
-    await collection.deleteMany(query);
-  } catch (ex) {
-    console.log(`Database (${url}) error: ${ex.message}`);
-  } finally {
-    await client.close();
+  async function addUser(user) {
+    await userCollection.insertOne(user);
   }
+
+  // try {
+  //   // Insert a document
+  //   const house = {
+  //     name: 'Beachfront views',
+  //     summary: 'From your bedroom to the beach, no shoes required',
+  //     property_type: 'Condo',
+  //     beds: 1,
+  //   };
+  //   await collection.insertOne(house);
+
+  //   // Query the documents
+  //   const query = { property_type: 'Condo', beds: { $lt: 2 } };
+  //   const options = {
+  //     sort: { name: -1 },
+  //     limit: 10,
+  //   };
+  //   const cursor = collection.find(query, options);
+  //   const rentals = await cursor.toArray();
+  //   rentals.forEach((i) => console.log(i));
+
+  //   // Delete documents
+  //   await collection.deleteMany(query);
+  // } catch (ex) {
+  //   console.log(`Database (${url}) error: ${ex.message}`);
+  // } finally {
+  //   await client.close();
+  // }
 }
 
-main();
+module.exports = {
+  addUser
+};

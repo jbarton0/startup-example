@@ -46,7 +46,11 @@ let recipes = [
 //Helper functions
 async function findUser(field, value) {
   if (!value) return null;
-  return users.find((u) => u[field] === value);
+
+  if (field === 'token') {
+    return db.getUserByToken(value);
+  }
+  return db.getUser(value);
 }
 
 async function createUser(email, password) {

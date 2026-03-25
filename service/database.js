@@ -83,8 +83,14 @@ async function seedRecipes() {
 }
 
 async function addRecipe(recipe) {
-  const result = await recipeCollection.insertOne(recipe);
-  return { ...recipe, id: result.insertedId };
+  const doc = {
+    ...recipe,
+    id: uuid.v4(),
+    totalScore: 0,
+    numRatings: 0,
+  };
+  await recipeCollection.insertOne(doc);
+  return doc;
 }
 
 async function getRecipes() {
@@ -93,19 +99,21 @@ async function getRecipes() {
 }
 
 async function rateRecipe(id, rating) {
-  await recipeCollection.updateOne(
-    { id },
+  const result = await recipeCollection.findOneAndUpdate(
+    { id: id },
     { $inc: {
-        totalScore: rating,
+        totalScore: Number(rating),
         numRatings: 1,
       },
-    }
+    },
+    { returnDocument: 'after' }
   );
-  const updated = await recipeCollection.findOne({ id });
-  if (!updated) return null;
-  return updated.numRatings > 0
-    ? updated.totalScore / updated.numRatings
-    : null;
+  const updatedDoc = result.value || result;
+  if (!updatedDoc) return null;
+
+  return updatedDoc.numRatings > 0
+    ? updatedDoc.totalScore / updatedDoc.numRatings
+    : 0;
 }
 
 module.exports = {

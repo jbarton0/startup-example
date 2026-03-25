@@ -14,6 +14,10 @@ export default function RecipeCard ({ id, title, link, rating, imgSrc, userName,
         }
     }, [userRating]);
 
+    React.useEffect(() => {
+        setAvgRating(rating);
+    }, [rating]);
+
     const enterHandler = async (e) => {
         if (e.key == 'Enter') {
             const value = Number(e.target.value)
@@ -26,7 +30,7 @@ export default function RecipeCard ({ id, title, link, rating, imgSrc, userName,
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                //credentials: 'include',
+                credentials: 'include',
                 body: JSON.stringify({
                     id,
                     rating: value,
@@ -34,7 +38,11 @@ export default function RecipeCard ({ id, title, link, rating, imgSrc, userName,
             });
 
             const data = await response.json();
-            setAvgRating(data.average);
+            if (response.ok && data.average != null) {
+                setAvgRating(data.average);
+            } else if (!response.ok) {
+                console.error('Error rating recipe:', data.error);
+            }
             }
         }
     };
@@ -45,7 +53,7 @@ export default function RecipeCard ({ id, title, link, rating, imgSrc, userName,
                 <div className="card-body">
                     <a href={ link } style={{ color: "goldenrod" }}>{ title }</a>
                     <p className="card-text small">Submitted by {userName}</p>
-                    <span style={{ color: "brown" }}>Rating: { avgRating ? avgRating.toFixed(1) : "N/A" }</span>
+                    <span style={{ color: "brown" }}>Rating: { typeof avgRating === 'number' ? avgRating.toFixed(1) : "N/A" }</span>
                     
                     {userRating && (
                         <p>{ currentUser.split('@')[0] } rated { userRating }</p>

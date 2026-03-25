@@ -112,7 +112,8 @@ apiRouter.post('/recipes', verifyAuth, async (req, res) => {
     imgSrc: req.body.imgSrc,
     userName: req.body.userName,
     totalScore: 0,
-    numRatings: 0
+    numRatings: 0,
+    avgRating: null
   };
   const result = await db.addRecipe(recipe);
   res.send(result);
@@ -135,18 +136,21 @@ apiRouter.get('/recipes', async (req, res) => {
 //Submit ratings endpoint
 apiRouter.post('/recipes/rate', async (req, res) => {
   const { id, rating } = req.body;
-  console.log("POST /recipes/rate received", id, rating);
+  if (!id || rating == null) {
+    return res.status(400).json({ error: 'Missing id or rating' });
+  }
 
   try {
     const average = await db.rateRecipe(id, rating);
 
     if (average === null) {
-      return res.status(404).send('Recipe not found');
+      return res.status(404).json({ error: 'Recipe not found' });
     }
     console.log("ID:", id);
     console.log("Average:", average);
     res.json({ average });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 });

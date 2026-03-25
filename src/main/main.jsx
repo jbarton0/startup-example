@@ -55,6 +55,7 @@ return (
             {recipes.map((recipe) => (
                 <RecipeCard 
                 key={recipe.id}
+                id={recipe.id}
                 title={recipe.title}
                 link={recipe.link}
                 rating={recipe.avgRating}

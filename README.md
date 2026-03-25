@@ -82,3 +82,8 @@ For this deliverable, I used CSS to design my startup.
 - [x] **Frontend calls service endpoints** - Mocked frontend functionality replaced with calls to service.
 - [x] **Supports registration, login, logout, and restricted endpoint** - Fully support authentication and restrict access to recipes.
 - [x] **Uses BCrypt to hash passwords** - I completed this part of the deliverable.
+
+## DB/Login deliverable
+
+- [x] **Stores data in MongoDB** - Recipe cards and ratings stored in MongoDB from `service/database.js`.
+- [x] **Stores credentials in MongoDB** - Auth stored in MongoDB from `service/database.js`.

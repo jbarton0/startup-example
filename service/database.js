@@ -53,8 +53,6 @@ async function seedRecipes() {
       // rating: 8.7,
       imgSrc: "https://www.budgetbytes.com/wp-content/uploads/2018/04/Easiest-Burrito-Bowl-Meal-Prep-V3.jpg",
       userName: "system",
-      totalScore: 0,
-      numRatings: 0
     },
     {
       id: uuid.v4(),
@@ -63,8 +61,6 @@ async function seedRecipes() {
       // rating: 9.1,
       imgSrc: "https://girlheartfood.com/wp-content/uploads/2021/09/Salmon-Rice-Bowl-2.jpg",
       userName: "system",
-      totalScore: 0,
-      numRatings: 0
     },
     {
       id: uuid.v4(),
@@ -73,8 +69,6 @@ async function seedRecipes() {
       // rating: 7.4,
       imgSrc: "https://thegirlonbloor.com/wp-content/uploads/2019/04/Meal-Prep-Chicken-Enchiladas-Verdes-6.jpg",
       userName: "system",
-      totalScore: 0,
-      numRatings: 0
     }
   ];
 
@@ -90,7 +84,7 @@ async function seedRecipes() {
 
 async function addRecipe(recipe) {
   const result = await recipeCollection.insertOne(recipe);
-  return { ...recipe, _id: result.insertedId };
+  return { ...recipe, id: result.insertedId };
 }
 
 async function getRecipes() {
@@ -123,6 +117,7 @@ module.exports = {
   updateUser,
   updateUserRemoveAuth,
   addRecipe,
+  seedRecipes,
   getRecipes,
   rateRecipe,
 };

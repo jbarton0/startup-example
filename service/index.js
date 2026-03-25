@@ -4,6 +4,13 @@ const express = require('express');
 const uuid = require('uuid');
 const app = express();
 const db = require('./database.js');
+(async () => {
+  try {
+    await db.seedRecipes();
+  } catch (err) {
+    console.error('Error seeding recipes:', err);
+  }
+})();
 
 const authCookieName = 'token';
 
@@ -112,11 +119,13 @@ apiRouter.post('/recipes', verifyAuth, async (req, res) => {
 });
 
 //Get saved recipes endpoint
-apiRouter.get('/recipes', verifyAuth, async (req, res) => {
+apiRouter.get('/recipes', async (req, res) => {
   const recipes = await db.getRecipes();
   console.log(recipes);
   const formatted = recipes.map(r => ({
     ...r,
+    totalScore: r.totalScore || 0,
+    numRatings: r.numRatings || 0,
     avgRating:
       r.numRatings > 0 ? r.totalScore / r.numRatings : null,
   }));
@@ -124,8 +133,9 @@ apiRouter.get('/recipes', verifyAuth, async (req, res) => {
 });
 
 //Submit ratings endpoint
-apiRouter.post('/recipes/rate', verifyAuth, async (req, res) => {
+apiRouter.post('/recipes/rate', async (req, res) => {
   const { id, rating } = req.body;
+  console.log("POST /recipes/rate received", id, rating);
 
   try {
     const average = await db.rateRecipe(id, rating);
@@ -133,6 +143,8 @@ apiRouter.post('/recipes/rate', verifyAuth, async (req, res) => {
     if (average === null) {
       return res.status(404).send('Recipe not found');
     }
+    console.log("ID:", id);
+    console.log("Average:", average);
     res.json({ average });
   } catch (err) {
     res.status(500).json({ error: err.message });

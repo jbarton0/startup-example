@@ -54,12 +54,13 @@ return (
             
             {recipes.map((recipe) => (
                 <RecipeCard 
-                key={recipe._id}
+                key={recipe.id}
                 title={recipe.title}
                 link={recipe.link}
                 rating={recipe.avgRating}
                 imgSrc={recipe.imgSrc}
-                userName={userName}
+                userName={recipe.userName}
+                currentUser={userName}
                 />
             ))}
 

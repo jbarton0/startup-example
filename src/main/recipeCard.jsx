@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function RecipeCard ({ id, title, link, rating, imgSrc, userName }) {
+export default function RecipeCard ({ id, title, link, rating, imgSrc, userName, currentUser }) {
 
-    const storageKey = `rating-${title}-${userName}`;
+    const storageKey = `rating-${title}-${currentUser}`;
     const [avgRating, setAvgRating] = React.useState(rating);
     const [userRating, setRating] = React.useState(() => {
         return localStorage.getItem(storageKey) || null;
@@ -11,7 +11,6 @@ export default function RecipeCard ({ id, title, link, rating, imgSrc, userName 
     React.useEffect(() => {
         if (userRating !== null) {
             localStorage.setItem(storageKey, userRating);
-
         }
     }, [userRating]);
 
@@ -27,7 +26,7 @@ export default function RecipeCard ({ id, title, link, rating, imgSrc, userName 
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                credentials: 'include',
+                //credentials: 'include',
                 body: JSON.stringify({
                     id,
                     rating: value,
@@ -45,11 +44,11 @@ export default function RecipeCard ({ id, title, link, rating, imgSrc, userName 
                 <img src={ imgSrc } alt="Meal prep recipe photo" className="card-img-top" height="150"></img>
                 <div className="card-body">
                     <a href={ link } style={{ color: "goldenrod" }}>{ title }</a>
-                    <p className="card-text small">Submitted by ____</p>
+                    <p className="card-text small">Submitted by {userName}</p>
                     <span style={{ color: "brown" }}>Rating: { avgRating ? avgRating.toFixed(1) : "N/A" }</span>
                     
                     {userRating && (
-                        <p>{ userName.split('@')[0] } rated { userRating }</p>
+                        <p>{ currentUser.split('@')[0] } rated { userRating }</p>
                     )}
                    
                     <div>

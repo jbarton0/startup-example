@@ -57,7 +57,7 @@ return (
                 key={recipe._id}
                 title={recipe.title}
                 link={recipe.link}
-                rating={recipe.rating}
+                rating={recipe.avgRating}
                 imgSrc={recipe.imgSrc}
                 userName={userName}
                 />

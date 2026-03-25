@@ -1,7 +1,6 @@
 import React from 'react';
 
-export default function RecipeCard ({ title, link, rating, imgSrc, userName }) {
-    // add weight for rating (ex number of people that have rated the recipe)
+export default function RecipeCard ({ id, title, link, rating, imgSrc, userName }) {
 
     const storageKey = `rating-${title}-${userName}`;
     const [avgRating, setAvgRating] = React.useState(rating);
@@ -30,7 +29,7 @@ export default function RecipeCard ({ title, link, rating, imgSrc, userName }) {
                 },
                 credentials: 'include',
                 body: JSON.stringify({
-                    title,
+                    id,
                     rating: value,
                 }),
             });

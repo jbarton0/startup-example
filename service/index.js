@@ -102,9 +102,10 @@ apiRouter.post('/recipes', verifyAuth, async (req, res) => {
     id: uuid.v4(),
     title: req.body.title,
     link: req.body.link,
-    rating: req.body.rating,
     imgSrc: req.body.imgSrc,
-    userName: req.body.userName
+    userName: req.body.userName,
+    totalScore: 0,
+    numRatings: 0
   };
   const result = await db.addRecipe(recipe);
   res.send(result);
@@ -113,25 +114,29 @@ apiRouter.post('/recipes', verifyAuth, async (req, res) => {
 //Get saved recipes endpoint
 apiRouter.get('/recipes', verifyAuth, async (req, res) => {
   const recipes = await db.getRecipes();
-  res.send(recipes);
+  console.log(recipes);
+  const formatted = recipes.map(r => ({
+    ...r,
+    avgRating:
+      r.numRatings > 0 ? r.totalScore / r.numRatings : null,
+  }));
+  res.send(formatted);
 });
 
 //Submit ratings endpoint
-app.post('/api/recipes/rate', async (req, res) => {
-  const { title, rating } = req.body;
+apiRouter.post('/recipes/rate', verifyAuth, async (req, res) => {
+  const { id, rating } = req.body;
 
-  const recipe = await Recipe.findOne({ title });
+  try {
+    const average = await db.rateRecipe(id, rating);
 
-  if (!recipe) return res.status(404).send('Recipe not found');
-
-  recipe.totalScore += rating;
-  recipe.numRatings += 1;
-
-  await recipe.save();
-
-  res.json({
-    average: recipe.totalScore / recipe.numRatings
-  });
+    if (average === null) {
+      return res.status(404).send('Recipe not found');
+    }
+    res.json({ average });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 //Get random image endpoint
@@ -156,5 +161,3 @@ app.use((_req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
-
-

@@ -87,3 +87,11 @@ For this deliverable, I used CSS to design my startup.
 
 - [x] **Stores data in MongoDB** - Recipe cards and ratings stored in MongoDB from `service/database.js`.
 - [x] **Stores credentials in MongoDB** - Auth stored in MongoDB from `service/database.js`.
+
+## WebSocket deliverable
+
+- [x] **Backend listens for WebSocket connection** - Backend webSocket managed in `service/peerProxy.js`.
+- [x] **Frontend makes WebSocket connection** - Frontend webSocket managed in `src/app.jsx` and `src/main/RecipeCard.jsx`.
+- [x] **Data sent over WebSocket connection** - JSON representation of recipe ratings.
+- [x] **WebSocket data displayed** - Flashing `New Rating Submitted` button in footer.
+- [x] **Application is fully functional**

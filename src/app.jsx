@@ -20,18 +20,21 @@ export default function App() {
     console.log('WebSocket connected');
   };
 
-  socket.onmessage = (event) => {
+  socket.onmessage = async (event) => {
     try {
-      const msg = JSON.parse(event.data);
+    let data;
 
-      if (msg.type === 'newRating') {
-        // trigger flash
-        setIsActive(true);
+    if (event.data instanceof Blob) {
+      const text = await event.data.text();
+      data = JSON.parse(text);
+    } else {
+      data = JSON.parse(event.data);
+    }
 
-        setTimeout(() => {
-          setIsActive(false);
-        }, 1000);
-      }
+    if (data.type === 'newRating') {
+      setIsActive(true);
+      setTimeout(() => setIsActive(false), 1000);
+    }
     } catch (err) {
       console.error('Invalid WS message', err);
     }

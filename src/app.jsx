@@ -14,7 +14,10 @@ export default function App() {
   const [isActive, setIsActive] = React.useState(false);
 
   React.useEffect(() => {
-  const socket = new WebSocket(`ws://localhost:4000`);
+  const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+  const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+
+  console.log("opened the socket???? maybe", socket);
 
   socket.onopen = () => {
     console.log('WebSocket connected');
@@ -43,6 +46,13 @@ export default function App() {
   socket.onclose = () => {
     console.log('WebSocket closed');
   };
+
+  socket.onerror = (err) => {
+    console.error('WebSocket error:', err);
+  };
+
+  socket.onclose = (e) => console.log('WS closed — code:', e.code, 'reason:', e.reason);
+
 
   return () => {
     socket.close();

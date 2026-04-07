@@ -40,6 +40,16 @@ export default function RecipeCard ({ id, title, link, rating, imgSrc, userName,
             const data = await response.json();
             if (response.ok && data.average != null) {
                 setAvgRating(data.average);
+                const socket = new WebSocket(`ws://localhost:4000`);
+
+                socket.onopen = () => {
+                    socket.send(JSON.stringify({
+                        type: 'newRating',
+                        recipeId: id,
+                    }));
+                    socket.close();
+                };
+
             } else if (!response.ok) {
                 console.error('Error rating recipe:', data.error);
             }

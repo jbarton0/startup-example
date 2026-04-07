@@ -93,5 +93,5 @@ For this deliverable, I used CSS to design my startup.
 - [x] **Backend listens for WebSocket connection** - Backend webSocket managed in `service/peerProxy.js`.
 - [x] **Frontend makes WebSocket connection** - Frontend webSocket managed in `src/app.jsx` and `src/main/RecipeCard.jsx`.
 - [x] **Data sent over WebSocket connection** - JSON representation of recipe ratings.
-- [x] **WebSocket data displayed** - Flashing `New Rating Submitted` button in footer.
+- [x] **WebSocket data displayed** - `New Rating Submitted` button in footer flashes on all users' displays when a new rating is submitted.
 - [x] **Application is fully functional**

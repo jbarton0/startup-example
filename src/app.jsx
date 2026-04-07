@@ -14,21 +14,37 @@ export default function App() {
   const [isActive, setIsActive] = React.useState(false);
 
   React.useEffect(() => {
-    let timeoutId;
+  const socket = new WebSocket(`ws://${window.location.host}`);
 
-    const interval = setInterval(() => {
-      setIsActive(true);
-      
-      timeoutId = setTimeout(() => {
-        setIsActive(false);
-      }, 1000);
-    }, 5000);
+  socket.onopen = () => {
+    console.log('WebSocket connected');
+  };
 
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeoutId);
+  socket.onmessage = (event) => {
+    try {
+      const msg = JSON.parse(event.data);
+
+      if (msg.type === 'newRating') {
+        // trigger flash
+        setIsActive(true);
+
+        setTimeout(() => {
+          setIsActive(false);
+        }, 1000);
+      }
+    } catch (err) {
+      console.error('Invalid WS message', err);
     }
-  }, []);
+  };
+
+  socket.onclose = () => {
+    console.log('WebSocket closed');
+  };
+
+  return () => {
+    socket.close();
+  };
+}, []);
 
 
   return (

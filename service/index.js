@@ -4,6 +4,8 @@ const express = require('express');
 const uuid = require('uuid');
 const app = express();
 const db = require('./database.js');
+const { peerProxy } = require('./peerProxy.js');
+
 (async () => {
   try {
     await db.seedRecipes();
@@ -177,3 +179,5 @@ app.use((_req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+peerProxy(httpService);
